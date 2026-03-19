@@ -65,7 +65,7 @@ export const PerformanceComparison: React.FC = () => {
               <div className="space-y-2">
                 <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">
                   {isNearlyEqual ? (
-                    <span>Execution times are nearly identical for input <span className="font-bold text-zinc-900 dark:text-white">n={inputSize}</span>.</span>
+                    <span>Performance is equivalent for input <span className="font-bold text-zinc-900 dark:text-white">n={inputSize}</span>.</span>
                   ) : (
                     <>
                       <span className="text-zinc-900 dark:text-white font-bold">{faster}</span> demonstrates higher efficiency for <span className="font-bold text-zinc-900 dark:text-white">n={inputSize}</span>, performing{' '}

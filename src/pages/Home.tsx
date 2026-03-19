@@ -110,10 +110,12 @@ const Home: React.FC = () => {
                   <ResultCard 
                     result={tabulationResult} 
                     isFaster={fasterAlgorithm === 'tabulation'} 
+                    isEqual={fasterAlgorithm === null}
                   />
                   <ResultCard 
                     result={memoizationResult} 
                     isFaster={fasterAlgorithm === 'memoization'} 
+                    isEqual={fasterAlgorithm === null}
                   />
                 </div>
               )}

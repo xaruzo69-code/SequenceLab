@@ -5,9 +5,10 @@ import { Clock, ListOrdered, CheckCircle2, ChevronDown, ChevronUp } from 'lucide
 interface ResultCardProps {
   result: PerformanceResult;
   isFaster?: boolean;
+  isEqual?: boolean;
 }
 
-export const ResultCard: React.FC<ResultCardProps> = ({ result, isFaster }) => {
+export const ResultCard: React.FC<ResultCardProps> = ({ result, isFaster, isEqual }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const isTabulation = result.algorithm === 'tabulation';
   
@@ -23,12 +24,20 @@ export const ResultCard: React.FC<ResultCardProps> = ({ result, isFaster }) => {
     <div className={`relative flex flex-col h-full min-h-[500px] bg-white dark:bg-zinc-900 p-6 rounded-xl shadow-md border-2 transition-all duration-300 ${
       isFaster 
         ? 'border-green-500 bg-green-50/10 dark:bg-green-500/5' 
-        : 'border-zinc-200 dark:border-zinc-800'
+        : isEqual
+          ? 'border-blue-500/50 bg-blue-50/5 dark:bg-blue-500/5'
+          : 'border-zinc-200 dark:border-zinc-800'
     }`}>
       {isFaster && (
         <div className="absolute top-0 right-0 transform translate-x-1/4 -translate-y-1/4 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1 shadow-lg z-20">
           <CheckCircle2 size={12} />
           FASTER
+        </div>
+      )}
+
+      {isEqual && (
+        <div className="absolute top-0 right-0 transform translate-x-1/4 -translate-y-1/4 bg-blue-500 text-white text-[10px] font-bold px-3 py-1 rounded-full flex items-center gap-1 shadow-lg z-20 uppercase tracking-widest">
+          Equivalent
         </div>
       )}
       
