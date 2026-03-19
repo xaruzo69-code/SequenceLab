@@ -3,12 +3,24 @@ import { InputSection } from '../components/InputSection';
 import { ResultCard } from '../components/ResultCard';
 import { PerformanceComparison } from '../components/PerformanceComparison';
 import { ComplexityChart } from '../components/ComplexityChart';
+import { FibonacciSeries } from '../components/FibonacciSeries';
 import { ThemeToggle } from '../components/ThemeToggle';
 import { useStore } from '../store/useStore';
 import { Activity, Info } from 'lucide-react';
 
 const Home: React.FC = () => {
   const { tabulationResult, memoizationResult, isLoading } = useStore();
+  const shouldShowSharedSeries =
+    !!tabulationResult &&
+    !!memoizationResult &&
+    tabulationResult.inputSize === memoizationResult.inputSize &&
+    tabulationResult.sequence.length === memoizationResult.sequence.length &&
+    tabulationResult.sequence.length > 0 &&
+    tabulationResult.sequence[0] === memoizationResult.sequence[0] &&
+    (tabulationResult.sequence.length < 2 || tabulationResult.sequence[1] === memoizationResult.sequence[1]) &&
+    (tabulationResult.sequence.length < 3 || tabulationResult.sequence[2] === memoizationResult.sequence[2]) &&
+    tabulationResult.sequence[tabulationResult.sequence.length - 1] ===
+      memoizationResult.sequence[memoizationResult.sequence.length - 1];
 
   const fasterAlgorithm = tabulationResult && memoizationResult
     ? (() => {
@@ -144,13 +156,19 @@ const Home: React.FC = () => {
                     result={tabulationResult} 
                     isFaster={fasterAlgorithm === 'tabulation'} 
                     isEqual={fasterAlgorithm === null}
+                    showSequence={!shouldShowSharedSeries}
                   />
                   <ResultCard 
                     result={memoizationResult} 
                     isFaster={fasterAlgorithm === 'memoization'} 
                     isEqual={fasterAlgorithm === null}
+                    showSequence={!shouldShowSharedSeries}
                   />
                 </div>
+              )}
+
+              {shouldShowSharedSeries && !isLoading && tabulationResult && (
+                <FibonacciSeries sequence={tabulationResult.sequence} n={tabulationResult.inputSize} />
               )}
 
               {isLoading ? (
