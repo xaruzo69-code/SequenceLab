@@ -11,9 +11,20 @@ const Home: React.FC = () => {
   const { tabulationResult, memoizationResult, isLoading } = useStore();
 
   const fasterAlgorithm = tabulationResult && memoizationResult
-    ? tabulationResult.executionTime < memoizationResult.executionTime
-      ? 'tabulation'
-      : 'memoization'
+    ? (() => {
+        const tabTime = tabulationResult.executionTime;
+        const memoTime = memoizationResult.executionTime;
+        const diff = Math.abs(tabTime - memoTime);
+        const minTime = 0.0001;
+        const ratio = tabTime < memoTime 
+          ? memoTime / Math.max(tabTime, minTime) 
+          : tabTime / Math.max(memoTime, minTime);
+        
+        // Use the same "nearly equal" threshold as PerformanceComparison.tsx
+        if (ratio < 1.05 || diff < 0.05) return null;
+        
+        return tabTime < memoTime ? 'tabulation' : 'memoization';
+      })()
     : null;
 
   return (
