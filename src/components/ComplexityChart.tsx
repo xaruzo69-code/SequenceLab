@@ -81,13 +81,14 @@ export const ComplexityChart: React.FC = () => {
             />
             <Tooltip 
               contentStyle={{ 
-                backgroundColor: 'rgba(255, 255, 255, 0.9)', 
+                backgroundColor: 'var(--chart-tooltip-bg)', 
                 borderRadius: '8px', 
-                border: 'none', 
-                boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)',
+                border: '1px solid var(--chart-tooltip-border)', 
+                boxShadow: 'var(--chart-tooltip-shadow)',
                 fontSize: '11px',
-                color: '#18181b'
+                color: 'var(--chart-tooltip-text)'
               }}
+              labelStyle={{ color: 'var(--chart-tooltip-text)', fontWeight: 700 }}
               itemStyle={{ padding: '2px 0' }}
             />
             <Legend 
