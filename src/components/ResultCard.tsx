@@ -56,28 +56,45 @@ export const ResultCard: React.FC<ResultCardProps> = ({ result, isFaster, isEqua
             <Clock size={18} className={isTabulation ? 'text-blue-600 dark:text-blue-400' : 'text-purple-600 dark:text-purple-400'} />
           </div>
           <div className="flex-1">
-            <p className="text-xs text-zinc-500 dark:text-zinc-400 uppercase font-bold tracking-wider">Avg. Execution Time</p>
+            <p className="text-sm font-bold text-zinc-700 dark:text-zinc-300">
+              Avg. Execution Time
+            </p>
             <p className="text-lg font-mono font-bold text-zinc-800 dark:text-zinc-200">
               {result.executionTime.toFixed(4)} <span className="text-sm font-normal">ms</span>
             </p>
-            <div className="flex gap-4 mt-1">
-              <div className="text-[10px] text-zinc-400 font-medium uppercase tracking-tighter">
-                Median: <span className="text-zinc-600 dark:text-zinc-300 font-mono">{result.medianTime.toFixed(4)}ms</span>
+            <div className="mt-2 grid grid-cols-2 gap-x-6 gap-y-1 text-xs text-zinc-600 dark:text-zinc-400">
+              <div>
+                Median:{' '}
+                <span className="font-mono tabular-nums text-zinc-800 dark:text-zinc-200">
+                  {result.medianTime.toFixed(4)}ms
+                </span>
               </div>
-              <div className="text-[10px] text-zinc-400 font-medium uppercase tracking-tighter">
-                Trimmed: <span className="text-zinc-600 dark:text-zinc-300 font-mono">{result.trimmedMeanTime.toFixed(4)}ms</span>
+              <div>
+                Trimmed:{' '}
+                <span className="font-mono tabular-nums text-zinc-800 dark:text-zinc-200">
+                  {result.trimmedMeanTime.toFixed(4)}ms
+                </span>
               </div>
-            </div>
-            <div className="flex gap-4 mt-1">
-              <div className="text-[10px] text-zinc-400 font-medium uppercase tracking-tighter">
-                Min: <span className="text-zinc-600 dark:text-zinc-300 font-mono">{result.minTime.toFixed(4)}ms</span>
+              <div>
+                Min:{' '}
+                <span className="font-mono tabular-nums text-zinc-800 dark:text-zinc-200">
+                  {result.minTime.toFixed(4)}ms
+                </span>
               </div>
-              <div className="text-[10px] text-zinc-400 font-medium uppercase tracking-tighter">
-                Max: <span className="text-zinc-600 dark:text-zinc-300 font-mono">{result.maxTime.toFixed(4)}ms</span>
-              </div>
-              <div className="ml-auto flex items-center gap-1 text-[10px] text-zinc-400 font-medium uppercase tracking-tighter" title="Min can show 0.0000ms due to timer resolution and rounding. Max may spike due to JIT compilation, garbage collection, or background activity. Median/trimmed mean are more robust to outliers.">
-                <Info size={12} className="opacity-70" />
-                Accuracy
+              <div className="flex items-center justify-between gap-3">
+                <span>
+                  Max:{' '}
+                  <span className="font-mono tabular-nums text-zinc-800 dark:text-zinc-200">
+                    {result.maxTime.toFixed(4)}ms
+                  </span>
+                </span>
+                <span
+                  className="inline-flex items-center gap-1 text-xs font-semibold text-zinc-500 dark:text-zinc-400"
+                  title="Min can show 0.0000ms due to timer resolution and rounding. Max may spike due to JIT compilation, garbage collection, or background activity. Median/trimmed mean are more robust to outliers."
+                >
+                  <Info size={14} className="opacity-80" />
+                  Accuracy
+                </span>
               </div>
             </div>
           </div>

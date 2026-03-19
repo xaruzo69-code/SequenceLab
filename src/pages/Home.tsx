@@ -90,10 +90,12 @@ const Home: React.FC = () => {
               
               <div className="bg-blue-50 dark:bg-blue-900/10 border border-blue-100 dark:border-blue-800/50 p-5 rounded-xl">
                 <div className="flex items-start gap-3">
-                  <Info size={18} className="text-blue-600 dark:text-blue-400 mt-0.5" />
+                  <div className="p-2 rounded-lg bg-blue-100/70 dark:bg-blue-900/30 text-blue-700 dark:text-blue-200 border border-blue-200/60 dark:border-blue-800/40">
+                    <Info size={18} />
+                  </div>
                   <div>
                     <h4 className="text-sm font-bold text-blue-900 dark:text-blue-100 mb-1">Quick Note</h4>
-                    <p className="text-xs text-blue-800 dark:text-blue-200/80 leading-relaxed">
+                    <p className="text-sm text-blue-900/90 dark:text-blue-100/90 leading-relaxed">
                       Tabulation is a bottom-up approach that fills an array. 
                       Memoization is top-down and uses recursion with a cache. 
                       In JavaScript, Tabulation is usually faster due to recursion overhead.
