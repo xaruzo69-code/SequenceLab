@@ -42,7 +42,7 @@ export const PerformanceComparison: React.FC = () => {
   const trimPercent = tabulationResult.trimPercent;
 
   return (
-    <div className="relative overflow-hidden bg-white dark:bg-zinc-900/50 text-zinc-900 dark:text-zinc-100 p-6 rounded-2xl shadow-xl border border-zinc-200 dark:border-zinc-800 transition-all duration-500 animate-in fade-in slide-in-from-bottom-4 group hover:shadow-2xl hover:border-blue-500/30 dark:hover:border-blue-400/20">
+    <div className="relative overflow-hidden bg-white dark:bg-zinc-900/50 text-zinc-900 dark:text-zinc-100 p-7 rounded-2xl shadow-xl border border-zinc-200 dark:border-zinc-800 transition-all duration-500 animate-in fade-in slide-in-from-bottom-4 group hover:shadow-2xl hover:border-blue-500/30 dark:hover:border-blue-400/20">
       {/* Background Decorative Element */}
       <div className="absolute -top-12 -right-12 w-32 h-32 bg-blue-500/5 dark:bg-blue-400/5 rounded-full blur-3xl group-hover:bg-blue-500/10 transition-colors duration-500" />
       <div className="absolute -bottom-12 -left-12 w-32 h-32 bg-purple-500/5 dark:bg-purple-400/5 rounded-full blur-3xl group-hover:bg-purple-500/10 transition-colors duration-500" />
@@ -58,7 +58,7 @@ export const PerformanceComparison: React.FC = () => {
             </h3>
           </div>
           <div className="flex flex-col items-end gap-2">
-            <div className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-600">
+            <div className="px-2 py-1 rounded-full border border-zinc-200 dark:border-zinc-800 bg-zinc-50/70 dark:bg-zinc-950/40 text-xs font-bold tracking-wide text-zinc-600 dark:text-zinc-300">
               Real-time Analysis
             </div>
             <div className="px-2 py-1 rounded-full border border-zinc-200 dark:border-zinc-800 bg-white/60 dark:bg-zinc-950/40 text-[10px] font-bold uppercase tracking-widest text-zinc-500 dark:text-zinc-400">
@@ -75,7 +75,7 @@ export const PerformanceComparison: React.FC = () => {
                 <TrendingUp size={16} />
               </div>
               <div className="space-y-2">
-                <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">
+                <p className="text-zinc-700 dark:text-zinc-200 text-sm leading-relaxed">
                   {isEquivalent ? (
                     <span>
                       Performance is equivalent for input <span className="font-bold text-zinc-900 dark:text-white">n={inputSize}</span> (trimmed {trimPercent}% over {iterations} runs).
@@ -110,12 +110,12 @@ export const PerformanceComparison: React.FC = () => {
           <div className="space-y-4">
             <div className="flex justify-between items-end">
               <div className="space-y-1">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-blue-500 dark:text-blue-400">Tabulation</span>
-                <p className="text-xs font-mono text-zinc-400 tabular-nums">{tabTime.toFixed(4)}ms</p>
+                <span className="text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400">Tabulation</span>
+                <p className="text-sm font-mono text-zinc-500 dark:text-zinc-300 tabular-nums">{tabTime.toFixed(4)}ms</p>
               </div>
               <div className="space-y-1 text-right">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-purple-500 dark:text-purple-400">Memoization</span>
-                <p className="text-xs font-mono text-zinc-400 tabular-nums">{memoTime.toFixed(4)}ms</p>
+                <span className="text-xs font-bold uppercase tracking-widest text-purple-600 dark:text-purple-400">Memoization</span>
+                <p className="text-sm font-mono text-zinc-500 dark:text-zinc-300 tabular-nums">{memoTime.toFixed(4)}ms</p>
               </div>
             </div>
             
@@ -134,33 +134,33 @@ export const PerformanceComparison: React.FC = () => {
               </div>
             </div>
             
-            <div className="flex justify-between text-[10px] text-zinc-400 dark:text-zinc-500 font-mono font-medium">
+            <div className="flex justify-between text-xs text-zinc-500 dark:text-zinc-300 font-mono font-semibold">
               <span>{tabPercent.toFixed(1)}% Relative Cost</span>
               <span>{memoPercent.toFixed(1)}% Relative Cost</span>
             </div>
           </div>
 
           {/* Metrics Grid */}
-          <div className="grid grid-cols-2 gap-4 pt-4 border-t border-zinc-100 dark:border-zinc-800/50">
-            <div className="group/metric p-3 rounded-xl bg-zinc-50/50 dark:bg-zinc-950/30 border border-transparent hover:border-zinc-200 dark:hover:border-zinc-800 transition-all duration-300">
-              <div className="flex items-center gap-1.5 mb-1.5">
+          <div className="grid grid-cols-2 gap-4 pt-6 border-t border-zinc-100 dark:border-zinc-800/50">
+            <div className="group/metric p-4 rounded-xl bg-zinc-50/50 dark:bg-zinc-950/30 border border-transparent hover:border-zinc-200 dark:hover:border-zinc-800 transition-all duration-300">
+              <div className="flex items-center gap-2 mb-2">
                 <div className="w-1 h-1 rounded-full bg-zinc-300 dark:bg-zinc-700" />
-                <p className="text-[10px] text-zinc-500 uppercase font-bold tracking-wider">Time Delta</p>
+                <p className="text-xs text-zinc-600 dark:text-zinc-300 uppercase font-bold tracking-wider">Time Delta</p>
               </div>
-              <p className="text-sm font-mono font-bold text-zinc-700 dark:text-zinc-300 tabular-nums">
-                {Math.abs(tabTime - memoTime).toFixed(4)} <span className="text-[10px] font-normal opacity-50">ms</span>
+              <p className="text-base font-mono font-bold text-zinc-800 dark:text-zinc-100 tabular-nums">
+                {Math.abs(tabTime - memoTime).toFixed(4)} <span className="text-xs font-semibold text-zinc-500 dark:text-zinc-400">ms</span>
               </p>
-              <p className="text-[8px] text-zinc-400 dark:text-zinc-600 mt-1 uppercase font-bold tracking-tight">Absolute Difference</p>
+              <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 font-medium">Absolute difference between the two methods.</p>
             </div>
-            <div className="group/metric p-3 rounded-xl bg-zinc-50/50 dark:bg-zinc-950/30 border border-transparent hover:border-zinc-200 dark:hover:border-zinc-800 transition-all duration-300">
-              <div className="flex items-center gap-1.5 mb-1.5">
-                <Cpu size={10} className="text-zinc-400" />
-                <p className="text-[10px] text-zinc-500 uppercase font-bold tracking-wider">Throughput</p>
+            <div className="group/metric p-4 rounded-xl bg-zinc-50/50 dark:bg-zinc-950/30 border border-transparent hover:border-zinc-200 dark:hover:border-zinc-800 transition-all duration-300">
+              <div className="flex items-center gap-2 mb-2">
+                <Cpu size={12} className="text-zinc-500 dark:text-zinc-400" />
+                <p className="text-xs text-zinc-600 dark:text-zinc-300 uppercase font-bold tracking-wider">Throughput</p>
               </div>
-              <p className="text-sm font-mono font-bold text-zinc-700 dark:text-zinc-300 tabular-nums">
+              <p className="text-base font-mono font-bold text-zinc-800 dark:text-zinc-100 tabular-nums">
                 {(1000 / Math.max(totalTime, 0.0001)).toFixed(2)}
               </p>
-              <p className="text-[8px] text-zinc-400 dark:text-zinc-600 mt-1 uppercase font-bold tracking-tight">Operations / ms</p>
+              <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 font-medium">Approx. comparisons per millisecond (higher is better).</p>
             </div>
           </div>
         </div>
