@@ -62,10 +62,14 @@ export const InputSection: React.FC = () => {
           <button
             onClick={handleExecute}
             disabled={isLoading || !inputValue}
-            className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-blue-500/20"
+            className="flex-1 md:w-32 flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-blue-500/20 whitespace-nowrap"
           >
-            <Play size={18} />
-            {isLoading ? 'Executing...' : 'Compare'}
+            {isLoading ? (
+              <div className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+            ) : (
+              <Play size={18} />
+            )}
+            <span>{isLoading ? 'Executing' : 'Compare'}</span>
           </button>
           <button
             onClick={handleReset}

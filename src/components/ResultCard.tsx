@@ -11,7 +11,7 @@ export const ResultCard: React.FC<ResultCardProps> = ({ result, isFaster }) => {
   const isTabulation = result.algorithm === 'tabulation';
   
   return (
-    <div className={`relative flex flex-col h-full bg-white dark:bg-zinc-900 p-6 rounded-xl shadow-md border-2 transition-all duration-300 ${
+    <div className={`relative flex flex-col h-full min-h-[500px] bg-white dark:bg-zinc-900 p-6 rounded-xl shadow-md border-2 transition-all duration-300 ${
       isFaster 
         ? 'border-green-500 bg-green-50/10 dark:bg-green-500/5' 
         : 'border-zinc-200 dark:border-zinc-800'
@@ -55,9 +55,9 @@ export const ResultCard: React.FC<ResultCardProps> = ({ result, isFaster }) => {
           </div>
         </div>
 
-        <div className="mt-4 pt-4 border-t border-zinc-100 dark:border-zinc-800">
+        <div className="mt-4 pt-4 border-t border-zinc-100 dark:border-zinc-800 flex-grow flex flex-col">
           <p className="text-xs text-zinc-500 dark:text-zinc-400 uppercase font-bold tracking-wider mb-2">Partial Sequence</p>
-          <div className="bg-zinc-50 dark:bg-zinc-950 rounded-lg p-3 max-h-32 overflow-y-auto font-mono text-xs leading-relaxed text-zinc-700 dark:text-zinc-300 break-all border border-zinc-100 dark:border-zinc-800">
+          <div className="bg-zinc-50 dark:bg-zinc-950 rounded-lg p-3 flex-grow max-h-64 overflow-y-auto font-mono text-xs leading-relaxed text-zinc-700 dark:text-zinc-300 break-all border border-zinc-100 dark:border-zinc-800 custom-scrollbar">
             {result.sequence.length > 50 
               ? `${result.sequence.slice(0, 50).map(b => b.toString()).join(', ')} ... [and ${result.sequence.length - 50} more]`
               : result.sequence.map(b => b.toString()).join(', ')
