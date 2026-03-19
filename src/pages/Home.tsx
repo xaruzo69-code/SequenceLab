@@ -32,7 +32,7 @@ const Home: React.FC = () => {
     <div className="h-screen flex flex-col bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 font-sans selection:bg-blue-100 dark:selection:bg-blue-900 transition-colors duration-300 overflow-hidden">
       {/* Header */}
       <header className="bg-white dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 z-50 shadow-sm flex-shrink-0">
-        <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="bg-blue-600 p-1.5 rounded-lg text-white shadow-lg shadow-blue-500/20">
               <Activity size={20} />
@@ -50,7 +50,7 @@ const Home: React.FC = () => {
 
       <main className="flex-1 overflow-y-auto custom-scrollbar flex flex-col">
         <div className="flex-1">
-          <div className="max-w-6xl mx-auto px-4 py-8 md:py-12">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8 py-8 md:py-12">
           {/* Intro */}
           <div className="mb-10 text-center md:text-left">
             <h2 className="text-3xl md:text-4xl font-black text-zinc-900 dark:text-zinc-50 mb-4 tracking-tight">
@@ -177,7 +177,7 @@ const Home: React.FC = () => {
 
         {/* Footer */}
         <footer className="border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 py-8 flex-shrink-0">
-          <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4 text-zinc-500 dark:text-zinc-400 text-xs">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-zinc-500 dark:text-zinc-400 text-xs">
             <p>© 2026 SequenceLab Tool. Built for educational purposes.</p>
             <div className="flex items-center gap-6">
               <a href="#" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">Documentation</a>
