@@ -10,7 +10,7 @@
     --chart-tooltip-bg: rgba(244, 244, 245, 0.94);
     --chart-tooltip-text: #18181b;
     --chart-tooltip-border: rgba(228, 228, 231, 0.9);
-    --chart-tooltip-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.25);
+    --chart-tooltip-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(228, 228, 231, 0.6), 0 0 18px rgba(59, 130, 246, 0.18);
   }
 
   .dark {
@@ -20,7 +20,7 @@
     --chart-tooltip-bg: rgba(24, 24, 27, 0.9);
     --chart-tooltip-text: rgba(244, 244, 245, 0.95);
     --chart-tooltip-border: rgba(63, 63, 70, 0.8);
-    --chart-tooltip-shadow: 0 12px 30px -14px rgba(0, 0, 0, 0.7);
+    --chart-tooltip-shadow: 0 12px 30px -14px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(63, 63, 70, 0.7), 0 0 22px rgba(59, 130, 246, 0.22);
     color-scheme: dark;
   }
 
