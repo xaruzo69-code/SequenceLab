@@ -66,7 +66,27 @@ const Home: React.FC = () => {
             {/* Left Column: Input and Performance Summary */}
             <div className="lg:col-span-4 space-y-6">
               <InputSection />
-              <PerformanceComparison />
+              {isLoading ? (
+                <div className="relative overflow-hidden bg-white dark:bg-zinc-900/50 p-6 rounded-2xl shadow-xl border border-zinc-200 dark:border-zinc-800 animate-pulse">
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-center gap-2.5">
+                      <div className="h-9 w-9 rounded-lg bg-zinc-100 dark:bg-zinc-800/60" />
+                      <div className="h-5 w-40 rounded bg-zinc-100 dark:bg-zinc-800/60" />
+                    </div>
+                    <div className="h-3 w-24 rounded bg-zinc-100 dark:bg-zinc-800/60" />
+                  </div>
+                  <div className="space-y-4">
+                    <div className="h-16 rounded-xl bg-zinc-50 dark:bg-zinc-950/40 border border-zinc-100 dark:border-zinc-800/50" />
+                    <div className="h-24 rounded-xl bg-zinc-50 dark:bg-zinc-950/40 border border-zinc-100 dark:border-zinc-800/50" />
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="h-20 rounded-xl bg-zinc-50 dark:bg-zinc-950/40 border border-zinc-100 dark:border-zinc-800/50" />
+                      <div className="h-20 rounded-xl bg-zinc-50 dark:bg-zinc-950/40 border border-zinc-100 dark:border-zinc-800/50" />
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <PerformanceComparison />
+              )}
               
               <div className="bg-blue-50 dark:bg-blue-900/10 border border-blue-100 dark:border-blue-800/50 p-5 rounded-xl">
                 <div className="flex items-start gap-3">
@@ -95,12 +115,22 @@ const Home: React.FC = () => {
               {isLoading && (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {[1, 2].map((i) => (
-                    <div key={i} className="bg-white dark:bg-zinc-900 p-6 rounded-xl shadow-md border border-zinc-200 dark:border-zinc-800 animate-pulse">
-                      <div className="h-6 w-32 bg-zinc-200 dark:bg-zinc-800 rounded mb-4" />
-                      <div className="space-y-4">
-                        <div className="h-10 w-full bg-zinc-100 dark:bg-zinc-800/50 rounded" />
-                        <div className="h-10 w-full bg-zinc-100 dark:bg-zinc-800/50 rounded" />
-                        <div className="h-24 w-full bg-zinc-50 dark:bg-zinc-950 rounded" />
+                    <div key={i} className="relative overflow-hidden bg-white dark:bg-zinc-900 p-6 rounded-xl shadow-md border border-zinc-200 dark:border-zinc-800 animate-pulse min-h-[550px] flex flex-col">
+                      <div className="flex items-start justify-between mb-4">
+                        <div className="space-y-2">
+                          <div className="h-6 w-32 bg-zinc-100 dark:bg-zinc-800/60 rounded" />
+                          <div className="h-3 w-24 bg-zinc-100 dark:bg-zinc-800/60 rounded" />
+                        </div>
+                        <div className="h-6 w-20 bg-zinc-100 dark:bg-zinc-800/60 rounded-full" />
+                      </div>
+                      <div className="space-y-4 flex-1">
+                        <div className="h-14 w-full bg-zinc-50 dark:bg-zinc-950/40 rounded-lg border border-zinc-100 dark:border-zinc-800/50" />
+                        <div className="h-14 w-full bg-zinc-50 dark:bg-zinc-950/40 rounded-lg border border-zinc-100 dark:border-zinc-800/50" />
+                        <div className="h-14 w-full bg-zinc-50 dark:bg-zinc-950/40 rounded-lg border border-zinc-100 dark:border-zinc-800/50" />
+                        <div className="mt-4 pt-4 border-t border-zinc-100 dark:border-zinc-800">
+                          <div className="h-3 w-28 bg-zinc-100 dark:bg-zinc-800/60 rounded mb-3" />
+                          <div className="h-48 w-full bg-zinc-50 dark:bg-zinc-950/40 rounded-lg border border-zinc-100 dark:border-zinc-800/50" />
+                        </div>
                       </div>
                     </div>
                   ))}
@@ -122,7 +152,24 @@ const Home: React.FC = () => {
                 </div>
               )}
 
-              <ComplexityChart />
+              {isLoading ? (
+                <div className="relative overflow-hidden bg-white dark:bg-zinc-900 p-6 rounded-xl shadow-md border border-zinc-200 dark:border-zinc-800 animate-pulse">
+                  <div className="flex items-center justify-between mb-8">
+                    <div className="flex items-center gap-2.5">
+                      <div className="h-9 w-9 rounded-lg bg-zinc-100 dark:bg-zinc-800/60" />
+                      <div>
+                        <div className="h-5 w-44 rounded bg-zinc-100 dark:bg-zinc-800/60 mb-2" />
+                        <div className="h-3 w-40 rounded bg-zinc-100 dark:bg-zinc-800/60" />
+                      </div>
+                    </div>
+                    <div className="h-7 w-40 rounded-full bg-zinc-100 dark:bg-zinc-800/60" />
+                  </div>
+                  <div className="h-[300px] w-full rounded-xl bg-zinc-50 dark:bg-zinc-950/40 border border-zinc-100 dark:border-zinc-800/50" />
+                  <div className="mt-6 h-12 rounded-lg bg-zinc-50 dark:bg-zinc-950/40 border border-zinc-100 dark:border-zinc-800/50" />
+                </div>
+              ) : (
+                <ComplexityChart />
+              )}
             </div>
           </div>
           </div>
