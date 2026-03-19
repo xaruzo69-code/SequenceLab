@@ -1,9 +1,9 @@
 import React from 'react';
 import { useStore } from '../store/useStore';
-import { Zap, AlertCircle, TrendingUp, Cpu } from 'lucide-react';
+import { Zap, AlertCircle, TrendingUp, Cpu, Hash, List } from 'lucide-react';
 
 export const PerformanceComparison: React.FC = () => {
-  const { tabulationResult, memoizationResult, error } = useStore();
+  const { tabulationResult, memoizationResult, inputSize, error } = useStore();
 
   if (error) {
     return (
@@ -30,6 +30,9 @@ export const PerformanceComparison: React.FC = () => {
     ? memoTime / Math.max(tabTime, minTime) 
     : tabTime / Math.max(memoTime, minTime);
   
+  // Check if execution times are nearly identical (e.g., within 5% or < 0.05ms diff)
+  const isNearlyEqual = ratio < 1.05 || Math.abs(tabTime - memoTime) < 0.05;
+  
   const tabPercent = totalTime > 0 ? (tabTime / totalTime) * 100 : 50;
   const memoPercent = totalTime > 0 ? (memoTime / totalTime) * 100 : 50;
 
@@ -54,16 +57,35 @@ export const PerformanceComparison: React.FC = () => {
           </div>
         </div>
 
-        <div className="space-y-8">
+        <div className="space-y-6">
+          {/* Summary Text Section */}
           <div className="bg-zinc-50 dark:bg-zinc-950/50 border border-zinc-100 dark:border-zinc-800/50 p-4 rounded-xl transition-all duration-300 hover:border-zinc-200 dark:hover:border-zinc-700">
             <div className="flex items-start gap-3">
               <TrendingUp className="text-green-500 mt-1" size={16} />
-              <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">
-                <span className="text-zinc-900 dark:text-white font-bold">{faster}</span> demonstrates higher efficiency, performing{' '}
-                <span className="text-green-500 dark:text-green-400 font-bold tabular-nums">
-                  {ratio > 100 ? 'over 100' : ratio.toFixed(2)}x
-                </span> faster than {slower} in this execution.
-              </p>
+              <div className="space-y-2">
+                <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">
+                  {isNearlyEqual ? (
+                    <span>Execution times are nearly identical for input <span className="font-bold text-zinc-900 dark:text-white">n={inputSize}</span>.</span>
+                  ) : (
+                    <>
+                      <span className="text-zinc-900 dark:text-white font-bold">{faster}</span> demonstrates higher efficiency for <span className="font-bold text-zinc-900 dark:text-white">n={inputSize}</span>, performing{' '}
+                      <span className="text-green-500 dark:text-green-400 font-bold tabular-nums">
+                        {ratio > 100 ? 'over 100' : ratio.toFixed(2)}x
+                      </span> faster than {slower}.
+                    </>
+                  )}
+                </p>
+                <div className="flex items-center gap-4 text-[10px] text-zinc-500 font-medium uppercase tracking-wider">
+                  <div className="flex items-center gap-1">
+                    <Hash size={12} className="opacity-70" />
+                    <span>Index: {inputSize}</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <List size={12} className="opacity-70" />
+                    <span>Terms: {inputSize + 1} (F₀-Fₙ)</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -100,24 +122,27 @@ export const PerformanceComparison: React.FC = () => {
             </div>
           </div>
 
+          {/* Metrics Grid */}
           <div className="grid grid-cols-2 gap-4 pt-4 border-t border-zinc-100 dark:border-zinc-800/50">
             <div className="group/metric p-3 rounded-xl bg-zinc-50/50 dark:bg-zinc-950/30 border border-transparent hover:border-zinc-200 dark:hover:border-zinc-800 transition-all duration-300">
               <div className="flex items-center gap-1.5 mb-1.5">
                 <div className="w-1 h-1 rounded-full bg-zinc-300 dark:bg-zinc-700" />
-                <p className="text-[10px] text-zinc-500 uppercase font-bold tracking-wider">Delta</p>
+                <p className="text-[10px] text-zinc-500 uppercase font-bold tracking-wider">Time Delta</p>
               </div>
               <p className="text-sm font-mono font-bold text-zinc-700 dark:text-zinc-300 tabular-nums">
                 {Math.abs(tabTime - memoTime).toFixed(4)} <span className="text-[10px] font-normal opacity-50">ms</span>
               </p>
+              <p className="text-[8px] text-zinc-400 dark:text-zinc-600 mt-1 uppercase font-bold tracking-tight">Absolute Difference</p>
             </div>
             <div className="group/metric p-3 rounded-xl bg-zinc-50/50 dark:bg-zinc-950/30 border border-transparent hover:border-zinc-200 dark:hover:border-zinc-800 transition-all duration-300">
               <div className="flex items-center gap-1.5 mb-1.5">
                 <Cpu size={10} className="text-zinc-400" />
-                <p className="text-[10px] text-zinc-500 uppercase font-bold tracking-wider">Ops/ms</p>
+                <p className="text-[10px] text-zinc-500 uppercase font-bold tracking-wider">Throughput</p>
               </div>
               <p className="text-sm font-mono font-bold text-zinc-700 dark:text-zinc-300 tabular-nums">
-                {(1000 / totalTime).toFixed(2)}
+                {(1000 / Math.max(totalTime, 0.0001)).toFixed(2)}
               </p>
+              <p className="text-[8px] text-zinc-400 dark:text-zinc-600 mt-1 uppercase font-bold tracking-tight">Operations / ms</p>
             </div>
           </div>
         </div>
