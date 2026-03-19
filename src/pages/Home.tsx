@@ -48,8 +48,9 @@ const Home: React.FC = () => {
         </div>
       </header>
 
-      <main className="flex-1 overflow-y-auto custom-scrollbar">
-        <div className="max-w-6xl mx-auto px-4 py-8 md:py-12">
+      <main className="flex-1 overflow-y-auto custom-scrollbar flex flex-col">
+        <div className="flex-1">
+          <div className="max-w-6xl mx-auto px-4 py-8 md:py-12">
           {/* Intro */}
           <div className="mb-10 text-center md:text-left">
             <h2 className="text-3xl md:text-4xl font-black text-zinc-900 dark:text-zinc-50 mb-4 tracking-tight">
@@ -124,10 +125,11 @@ const Home: React.FC = () => {
               <ComplexityChart />
             </div>
           </div>
+          </div>
         </div>
 
         {/* Footer */}
-        <footer className="mt-auto border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 py-8 flex-shrink-0">
+        <footer className="border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 py-8 flex-shrink-0">
           <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4 text-zinc-500 dark:text-zinc-400 text-xs">
             <p>© 2026 SequenceLab Tool. Built for educational purposes.</p>
             <div className="flex items-center gap-6">
