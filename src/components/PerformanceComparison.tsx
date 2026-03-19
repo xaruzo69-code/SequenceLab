@@ -94,7 +94,7 @@ export const PerformanceComparison: React.FC = () => {
                   </div>
                   <div className="flex items-center gap-1">
                     <List size={12} className="opacity-70" />
-                    <span>Terms: {inputSize + 1} (F₀-Fₙ)</span>
+                    <span>Terms: {inputSize + 1} (F0–Fn)</span>
                   </div>
                   <div className="flex items-center gap-1">
                     <Cpu size={12} className="opacity-60" />
