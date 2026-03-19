@@ -1,11 +1,13 @@
 export interface PerformanceResult {
   algorithm: 'tabulation' | 'memoization';
-  executionTime: number; // average time in milliseconds
+  executionTime: number;
   minTime: number;
   maxTime: number;
   sequence: bigint[];
   inputSize: number;
   iterations: number;
+  warmupIterations: number;
+  batchSize: number;
 }
 
 export function fibonacciTabulation(n: number): bigint[] {
@@ -49,32 +51,48 @@ export function measurePerformance(
   fn: (n: number) => bigint[],
   n: number,
   algorithm: 'tabulation' | 'memoization',
-  iterations: number = 500
+  iterations: number = 500,
+  warmupIterations: number = 50,
+  batchSize: number = 10
 ): PerformanceResult {
+  const safeIterations = Math.max(1, Math.floor(iterations));
+  const safeWarmup = Math.max(0, Math.floor(warmupIterations));
+  const safeBatchSize = Math.max(1, Math.floor(batchSize));
+
   let totalTime = 0;
   let minTime = Infinity;
   let maxTime = -Infinity;
   let lastSequence: bigint[] = [];
 
-  // Run iterations for benchmarking
-  for (let i = 0; i < iterations; i++) {
-    const start = performance.now();
+  for (let i = 0; i < safeWarmup; i++) {
     lastSequence = fn(n);
-    const end = performance.now();
-    const duration = end - start;
+  }
 
-    totalTime += duration;
-    if (duration < minTime) minTime = duration;
-    if (duration > maxTime) maxTime = duration;
+  let remaining = safeIterations;
+  while (remaining > 0) {
+    const currentBatch = Math.min(safeBatchSize, remaining);
+    const start = performance.now();
+    for (let i = 0; i < currentBatch; i++) {
+      lastSequence = fn(n);
+    }
+    const end = performance.now();
+    const perRun = (end - start) / currentBatch;
+
+    totalTime += perRun * currentBatch;
+    if (perRun < minTime) minTime = perRun;
+    if (perRun > maxTime) maxTime = perRun;
+    remaining -= currentBatch;
   }
 
   return {
     algorithm,
-    executionTime: totalTime / iterations,
+    executionTime: totalTime / safeIterations,
     minTime,
     maxTime,
     sequence: lastSequence,
     inputSize: n,
-    iterations
+    iterations: safeIterations,
+    warmupIterations: safeWarmup,
+    batchSize: safeBatchSize
   };
 }

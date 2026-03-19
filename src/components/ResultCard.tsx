@@ -80,6 +80,9 @@ export const ResultCard: React.FC<ResultCardProps> = ({ result, isFaster, isEqua
             <p className="text-sm font-mono font-bold text-zinc-800 dark:text-zinc-200">
               {result.iterations} <span className="text-[10px] font-normal uppercase opacity-60">iterations</span>
             </p>
+            <p className="text-[10px] text-zinc-400 font-medium uppercase tracking-tighter">
+              Warm-up: <span className="text-zinc-600 dark:text-zinc-300 font-mono">{result.warmupIterations}</span> · Batch: <span className="text-zinc-600 dark:text-zinc-300 font-mono">{result.batchSize}</span>
+            </p>
             <p className="text-[10px] text-zinc-400 font-medium uppercase tracking-tighter mt-0.5">
               Sequence: {result.inputSize + 1} terms (F₀-Fₙ)
             </p>
