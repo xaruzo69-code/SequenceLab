@@ -32,7 +32,7 @@ export const ComplexityChart: React.FC = () => {
   };
 
   return (
-    <div className="bg-white dark:bg-zinc-900 p-6 rounded-xl shadow-md border border-zinc-200 dark:border-zinc-800 transition-all duration-300 animate-in fade-in slide-in-from-bottom-4">
+    <div className="bg-white dark:bg-zinc-900 p-6 rounded-xl shadow-md border border-zinc-200 dark:border-zinc-800 transition-all duration-300 animate-in fade-in slide-in-from-bottom-4 overflow-hidden">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
         <div className="flex items-center gap-2.5">
           <div className="p-2 bg-blue-50 dark:bg-blue-900/20 rounded-lg text-blue-600 dark:text-blue-400">
